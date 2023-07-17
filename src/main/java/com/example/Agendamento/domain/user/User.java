@@ -1,6 +1,8 @@
 package com.example.Agendamento.domain.user;
 
+import com.example.Agendamento.domain.profile.Profile;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +18,6 @@ public class User implements UserDetails {
     private String login;
     private String password;
     private String email;
-
     public User(String login, String password, String email) {
         this.login = login;
         this.password = password;

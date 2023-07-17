@@ -1,11 +1,13 @@
 package com.example.Agendamento.controller;
 
+import com.example.Agendamento.domain.profile.Profile;
 import com.example.Agendamento.domain.user.AuthenticationDTO;
 import com.example.Agendamento.domain.user.LoginResponseDTO;
 import com.example.Agendamento.domain.user.RegisterDTO;
 import com.example.Agendamento.domain.user.User;
 import com.example.Agendamento.infra.security.TokenService;
 import com.example.Agendamento.repositories.UserRepository;
+import com.example.Agendamento.services.ProfileService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,10 @@ public class AutheticationController {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private ProfileService profileService;
+
     @Autowired
     private TokenService tokenService;
 
@@ -46,8 +52,9 @@ public class AutheticationController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.login(), encryptedPassword, data.email());
-
-        this.repository.save(newUser);
+        var insertedUser = this.repository.save(newUser);
+        Profile newProfile = new Profile(insertedUser.getId(), data.name(), data.age(), data.telefone());
+        profileService.createProfile(newProfile);
 
         return ResponseEntity.ok().build();
     }
