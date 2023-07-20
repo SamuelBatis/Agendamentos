@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 
 @Service
 public class ProfileService {
@@ -26,6 +25,7 @@ public class ProfileService {
     public Profile updateProfile(@Valid UpdateDataProfile data) {
         var profile = repository.findByUserId(data.userId());
         profile.updateInformation(data);
+        repository.save(profile);
         return profile;
     }
 }

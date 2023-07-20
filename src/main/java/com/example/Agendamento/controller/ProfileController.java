@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@RestController("profile")
+@RestController
+@RequestMapping("profile")
 public class ProfileController {
 
     @Autowired
