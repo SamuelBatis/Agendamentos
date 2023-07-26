@@ -13,19 +13,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("profile")
 public class ProfileController {
 
-    @Autowired
-    private ProfileService service;
+  @Autowired
+  private ProfileService service;
 
-    @PutMapping
-    @Transactional
-    public ResponseEntity updateProfile(@RequestBody @Valid UpdateDataProfile data) {
-        var response = service.updateProfile(data);
-        return ResponseEntity.ok(response);
-    }
+  @PutMapping
+  @Transactional
+  public ResponseEntity updateProfile(@RequestBody @Valid UpdateDataProfile data) {
+    var response = service.updateProfile(data);
+    return ResponseEntity.ok(response);
+  }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity getProfileByUserId(@PathVariable String userId) {
-        var profile  = service.getProfile(userId);
-        return ResponseEntity.ok(profile);
-    }
+  @GetMapping("/{userId}")
+  public ResponseEntity getProfileByUserId(@PathVariable String userId) {
+    var profile  = service.getProfile(userId);
+    return ResponseEntity.ok(profile);
+  }
 }
